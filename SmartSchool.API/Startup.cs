@@ -37,6 +37,17 @@ namespace SmartSchool.API
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IRepository, Repository>();
+
+            services.AddSwaggerGen(options =>
+                {
+                    options.SwaggerDoc(
+                        "smartschoolapi", new Microsoft.OpenApi.Models.OpenApiInfo() 
+                        { 
+                            Title = "SmartSchool API",
+                            Version = "1.0"
+                        });
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +59,12 @@ namespace SmartSchool.API
             }
 
             app.UseRouting();
+            app.UseSwagger()
+                .UseSwaggerUI(options => 
+                {
+                    options.SwaggerEndpoint("swagger/smartschoolapi/swagger.json", "smartschoolapi");
+                    options.RoutePrefix = "";
+                }) ;
 
             app.UseAuthorization();
 
