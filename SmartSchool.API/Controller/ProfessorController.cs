@@ -77,7 +77,7 @@ namespace SmartSchool.API.Controller
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var professor = _context.Professores.AsNoTracking().FirstOrDefault(p => p.Id == id);
+            var professor = _context.Professores.FirstOrDefault(p => p.Id == id);
             if (professor == null)
             {
                 return BadRequest("Professor não encontrado.");
