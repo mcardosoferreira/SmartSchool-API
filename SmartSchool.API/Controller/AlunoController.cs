@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Context;
+using SmartSchool.API.Dtos;
 using SmartSchool.API.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,17 +19,20 @@ namespace SmartSchool.API.Controller
        
 
         public readonly IRepository _repository;
+        public readonly IMapper _mapper;
 
-        public AlunoController(IRepository repository)
-        {            
+        public AlunoController(IRepository repository, IMapper mapper)
+        {
+            _mapper = mapper;
             _repository = repository;
         }
        
         [HttpGet]
         public IActionResult Get()
         {
-            var result = _repository.GetAllAlunos(true);
-            return Ok(result);
+            var alunos = _repository.GetAllAlunos(true);
+            
+            return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
         }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
