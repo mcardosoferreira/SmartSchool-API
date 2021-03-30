@@ -11,6 +11,7 @@ namespace SmartSchool.API.Dtos
         public int Matricula { get; set; }
         public string Nome { get; set; }
         public string Telefone { get; set; }
+        public int Idade { get; set; }
         public DateTime DataNascimento { get; set; }
         public DateTime DataInicio { get; set; } = DateTime.Now;        
         public bool Ativo { get; set; }
