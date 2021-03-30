@@ -13,6 +13,9 @@ using SmartSchool.API.Models;
 
 namespace SmartSchool.API.Controller
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AlunoController : ControllerBase    {
@@ -20,13 +23,21 @@ namespace SmartSchool.API.Controller
 
         public readonly IRepository _repository;
         public readonly IMapper _mapper;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="mapper"></param>
         public AlunoController(IRepository repository, IMapper mapper)
         {
             _mapper = mapper;
             _repository = repository;
         }
-       
+
+       /// <summary>
+       /// Método responsável pelo retorno de todos os meus alunos. 
+       /// </summary>
+       /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -34,6 +45,11 @@ namespace SmartSchool.API.Controller
             
             return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
         }
+        /// <summary>
+        /// Método responsável pelo retorno de um único aluno por meio do código ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {

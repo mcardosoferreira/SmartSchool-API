@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SmartSchool.API</name>
+    </assembly>
+    <members>
+        <member name="T:SmartSchool.API.Controller.AlunoController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SmartSchool.API.Controller.AlunoController.#ctor(SmartSchool.API.Context.IRepository,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="repository"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:SmartSchool.API.Controller.AlunoController.Get">
+            <summary>
+            Método responsável pelo retorno de todos os meus alunos. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.Controller.AlunoController.GetById(System.Int32)">
+            <summary>
+            Método responsável pelo retorno de um único aluno por meio do código ID.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

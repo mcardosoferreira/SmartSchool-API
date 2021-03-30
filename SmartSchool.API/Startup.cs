@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -41,11 +43,16 @@ namespace SmartSchool.API
             services.AddSwaggerGen(options =>
                 {
                     options.SwaggerDoc(
-                        "smartschoolapi", new Microsoft.OpenApi.Models.OpenApiInfo() 
-                        { 
+                        "smartschoolapi", new Microsoft.OpenApi.Models.OpenApiInfo()
+                        {
                             Title = "SmartSchool API",
                             Version = "1.0"
                         });
+
+                    var xmlCOmentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    var xmlCOmentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCOmentsFile);
+
+                    options.IncludeXmlComments(xmlCOmentsFullPath);
                 }
             );
         }
