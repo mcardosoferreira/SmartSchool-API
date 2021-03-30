@@ -16,7 +16,8 @@ namespace SmartSchool.API.Controller
     /// <summary>
     /// 
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class AlunoController : ControllerBase    {
        
