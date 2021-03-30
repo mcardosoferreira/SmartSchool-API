@@ -34,11 +34,6 @@ namespace SmartSchool.API.Controller
             
             return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
         }
-        [HttpGet("getRegister")]
-        public IActionResult GetRegister()
-        {
-            return Ok(new AlunoRegistrarDto());
-        }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
