@@ -17,10 +17,14 @@ namespace SmartSchool.API.Controller
     {
         private readonly SmartContext _context;
 
-        public AlunoController(SmartContext context)
+        public readonly IRepository _repository;
+
+        public AlunoController(SmartContext context, IRepository repository)
         {
             _context = context;
+            _repository = repository;
         }
+       
         [HttpGet]
         public IActionResult Get()
         {
