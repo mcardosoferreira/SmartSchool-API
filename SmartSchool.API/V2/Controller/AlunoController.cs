@@ -6,18 +6,18 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Context;
-using SmartSchool.API.Dtos;
+using SmartSchool.API.V1.Dtos;
 using SmartSchool.API.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace SmartSchool.API.Controller
+namespace SmartSchool.API.V2.Controller
 {
     /// <summary>
-    /// 
+    /// Versão 2.0 do menu controlador de alunos
     /// </summary>
     [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     [ApiController]
     public class AlunoController : ControllerBase    {
        
@@ -91,25 +91,7 @@ namespace SmartSchool.API.Controller
                 return Created($"/api/aluno/{model.Id}", _mapper.Map<AlunoDto>(aluno));
             }
             return BadRequest("Aluno não atualizado.");
-        }
-        [HttpPatch("{id}")]
-        public IActionResult Patch(int id, AlunoRegistrarDto model)
-        {
-            var aluno = _repository.GetAlunosById(id);
-            if (aluno == null)
-            {
-                return BadRequest("Aluno não encontrado.");
-            }
-
-            _mapper.Map(model, aluno);
-
-            _repository.Update(aluno);
-            if (_repository.SaveChanges())
-            {
-                return Created($"/api/aluno/{model.Id}", _mapper.Map<AlunoDto>(aluno));
-            }
-            return BadRequest("Aluno não atualizado.");
-        }
+        }       
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

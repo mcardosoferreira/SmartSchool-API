@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Context;
-using SmartSchool.API.Dtos;
+using SmartSchool.API.V1.Dtos;
 using SmartSchool.API.Models;
 
-namespace SmartSchool.API.Controller
+namespace SmartSchool.API.V1.Controller
 {
     [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion("2.0")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class ProfessorController : ControllerBase
     {       

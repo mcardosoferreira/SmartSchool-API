@@ -4,25 +4,50 @@
         <name>SmartSchool.API</name>
     </assembly>
     <members>
-        <member name="T:SmartSchool.API.Controller.AlunoController">
+        <member name="T:SmartSchool.API.V1.Controller.AlunoController">
             <summary>
             
             </summary>
         </member>
-        <member name="M:SmartSchool.API.Controller.AlunoController.#ctor(SmartSchool.API.Context.IRepository,AutoMapper.IMapper)">
+        <member name="M:SmartSchool.API.V1.Controller.AlunoController.#ctor(SmartSchool.API.Context.IRepository,AutoMapper.IMapper)">
             <summary>
             
             </summary>
             <param name="repository"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:SmartSchool.API.Controller.AlunoController.Get">
+        <member name="M:SmartSchool.API.V1.Controller.AlunoController.Get">
             <summary>
             Método responsável pelo retorno de todos os meus alunos. 
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SmartSchool.API.Controller.AlunoController.GetById(System.Int32)">
+        <member name="M:SmartSchool.API.V1.Controller.AlunoController.GetById(System.Int32)">
+            <summary>
+            Método responsável pelo retorno de um único aluno por meio do código ID.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartSchool.API.V2.Controller.AlunoController">
+            <summary>
+            Versão 2.0 do menu controlador de alunos
+            </summary>
+        </member>
+        <member name="M:SmartSchool.API.V2.Controller.AlunoController.#ctor(SmartSchool.API.Context.IRepository,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="repository"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:SmartSchool.API.V2.Controller.AlunoController.Get">
+            <summary>
+            Método responsável pelo retorno de todos os meus alunos. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.API.V2.Controller.AlunoController.GetById(System.Int32)">
             <summary>
             Método responsável pelo retorno de um único aluno por meio do código ID.
             </summary>
