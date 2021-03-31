@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Context;
 using SmartSchool.API.V1.Dtos;
 using SmartSchool.API.Models;
+using SmartSchool.API.Helpers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,12 +41,17 @@ namespace SmartSchool.API.V1.Controller
        /// </summary>
        /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]PageParams pageParams)
         {
-            var alunos = await _repository.GetAllAlunosAsync(true);
-            
-            return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
+            var alunos = await _repository.GetAllAlunosAsync(pageParams, true);
+
+            var alunosResult = _mapper.Map<IEnumerable<AlunoDto>>(alunos);
+
+            Response.AddPagination(alunos.CurrentPage, alunos.PageSize, alunos.TotalCount, alunos.TotalPages);
+
+            return Ok(alunosResult);
         }
+
         /// <summary>
         /// Método responsável pelo retorno de um único aluno por meio do código ID.
         /// </summary>
