@@ -14,6 +14,7 @@ namespace SmartSchool.API.Context
         bool SaveChanges();        
 
         //Aluno
+        Task<Aluno[]> GetAllAlunosAsync(bool includeProfessor = false);
         Aluno[] GetAllAlunos(bool includeProfessor = false);
         Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessor = false);
         Aluno GetAlunosById(int alunoId, bool includeProfessor = false);

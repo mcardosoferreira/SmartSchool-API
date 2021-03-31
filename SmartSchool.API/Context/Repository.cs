@@ -33,6 +33,20 @@ namespace SmartSchool.API.Context
         {
             return _context.SaveChanges() > 0;
         }
+        public async Task<Aluno[]> GetAllAlunosAsync(bool includeProfessor = false)
+        {
+            IQueryable<Aluno> query = _context.Alunos;
+
+            if (includeProfessor)
+            {
+                query = query.Include(aluno => aluno.AlunosDisciplinas)
+                             .ThenInclude(ad => ad.Disciplina)
+                             .ThenInclude(disciplina => disciplina.Professor);
+            }
+            query = query.AsNoTracking().OrderBy(aluno => aluno.Id);
+
+            return await query.ToArrayAsync();
+        }
 
         public Aluno[] GetAllAlunos(bool includeProfessor = false)
         {
@@ -48,6 +62,7 @@ namespace SmartSchool.API.Context
 
             return query.ToArray();
         }
+        
 
         public Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessor = false)
         {
