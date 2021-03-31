@@ -31,7 +31,7 @@ namespace SmartSchool.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SmartContext>(
-                context => context.UseSqlite(Configuration.GetConnectionString("Default"))
+                context => context.UseMySql(Configuration.GetConnectionString("MySqlConnection"))
                 );
 
             services.AddControllers()
@@ -73,7 +73,7 @@ namespace SmartSchool.API
                                 },
                                 Contact = new Microsoft.OpenApi.Models.OpenApiContact
                                 {
-                                    Name = "Matheus Ferreira",
+                                    Name = "Matheusss Ferreira",
                                     Email = "",
                                     Url = new Uri("http://programadamente.com")
                                 }
