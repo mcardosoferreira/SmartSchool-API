@@ -60,11 +60,11 @@ namespace SmartSchool.API.V1.Controller
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var aluno = _repository.GetAlunosById(id);
+            var aluno = _repository.GetAlunosById(id, false);
             if (aluno == null)
                 return BadRequest("Aluno não encontrado.");
 
-            var alunoDto = _mapper.Map<AlunoDto>(aluno);
+            var alunoDto = _mapper.Map<AlunoRegistrarDto>(aluno);
             return Ok(alunoDto);
         }        
         

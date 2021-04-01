@@ -24,5 +24,6 @@ namespace SmartSchool.API.Context
         Professor[] GetAllProfessores(bool includeAluno = false);
         Professor[] GetAllProfessoresByDisciplinaId(int disciplinaId, bool includeAluno = false);
         Professor GetProfessoresById(int professorId, bool includeAluno = false);
+        Professor[] GetProfessoresByAlunoId(int alunoId, bool includeAluno = false);
     }
 }
