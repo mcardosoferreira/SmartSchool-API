@@ -6,7 +6,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
@@ -91,21 +93,40 @@ namespace SmartSchool.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
-            if (env.IsDevelopment())
+            app.UseExceptionHandler(errorApp =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                errorApp.Run(async context =>
+                {
+                    context.Response.StatusCode = 500;
+                    context.Response.ContentType = "text/html";
+
+                    await context.Response.WriteAsync("<html><body>\r\n");
+                    await context.Response.WriteAsync("ERROR!<br><br>\r\n");
+
+                    var exceptionHandlerPathFeature =
+                        context.Features.Get<IExceptionHandlerPathFeature>();
+
+                    //if (exceptionHandlerPathFeature?.Error is FileNotFoundException)
+                    //{
+                    await context.Response.WriteAsync($"{exceptionHandlerPathFeature?.Error.Message}<br><br>\r\n");
+                    await context.Response.WriteAsync($"{exceptionHandlerPathFeature?.Error.StackTrace}<br><br>\r\n");
+                    //}
+
+                    await context.Response.WriteAsync("</body></html>\r\n");
+                    await context.Response.WriteAsync(new string(' ', 512));
+                });
+            });
 
             app.UseRouting();
             app.UseSwagger()
-                .UseSwaggerUI(options => 
+                .UseSwaggerUI(options =>
                 {
                     foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
                     {
                         options.SwaggerEndpoint($"swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                     }
                     options.RoutePrefix = "";
-                }) ;
+                });
 
             app.UseAuthorization();
 
