@@ -66,6 +66,13 @@ namespace SmartSchool.API.V1.Controller
 
             var alunoDto = _mapper.Map<AlunoRegistrarDto>(aluno);
             return Ok(alunoDto);
+        }  
+        
+        [HttpGet("ByDisciplina/{id}")]
+        public async Task<IActionResult> GetByDisciplinaId(int id)
+        {
+            var alunos = await _repository.GetAllAlunosByDisciplinaIdAsync(id, false);           
+            return Ok(alunos);
         }        
         
         [HttpPost]
@@ -99,7 +106,7 @@ namespace SmartSchool.API.V1.Controller
             return BadRequest("Aluno não atualizado.");
         }
         [HttpPatch("{id}")]
-        public IActionResult Patch(int id, AlunoRegistrarDto model)
+        public IActionResult Patch(int id, AlunoPatchDto model)
         {
             var aluno = _repository.GetAlunosById(id);
             if (aluno == null)
@@ -112,10 +119,31 @@ namespace SmartSchool.API.V1.Controller
             _repository.Update(aluno);
             if (_repository.SaveChanges())
             {
-                return Created($"/api/aluno/{model.Id}", _mapper.Map<AlunoDto>(aluno));
+                return Created($"/api/aluno/{model.Id}", _mapper.Map<AlunoPatchDto>(aluno));
             }
             return BadRequest("Aluno não atualizado.");
         }
+
+        [HttpPatch("{id}/trocarEstado")]
+        public IActionResult trocarEstado(int id, TrocaEstadoDto trocaEstado)
+        {
+            var aluno = _repository.GetAlunosById(id);
+            if (aluno == null)
+            {
+                return BadRequest("Aluno não encontrado.");
+            }
+
+            aluno.Ativo = trocaEstado.Estado;            
+
+            _repository.Update(aluno);
+            if (_repository.SaveChanges())
+            {
+                var msn = aluno.Ativo ? "ativado" : "desativado";
+                return Ok(new { message = $"Aluno {msn} com sucesso!" });
+            }
+            return BadRequest("Aluno não atualizado.");
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

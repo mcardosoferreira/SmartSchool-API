@@ -16,18 +16,23 @@ import { TituloComponent } from './components/shared/titulo/titulo.component';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ProfessorDetalheComponent } from './components/professores/professor-detalhe/professor-detalhe.component';
+import { AlunosProfessoresComponent } from './components/professores/alunos-professores/alunos-professores.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlunosComponent,
+    AlunosProfessoresComponent,
     DashboardComponent,
     PerfilComponent,
     ProfessoresAlunosComponent,
     ProfessoresComponent,
+    ProfessorDetalheComponent,
     NavComponent,
     TituloComponent
   ],
@@ -40,6 +45,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
+    PaginationModule.forRoot(),
     NgxSpinnerModule,
     ToastrModule.forRoot({
       timeOut: 3500,
